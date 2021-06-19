@@ -55,23 +55,38 @@ public class UserInterfaceSet extends UserInterface {
         status = new JLabel(calc.getAuthor());
         contentPane.add(status);
 
-//
-////            addButton(buttonPanel, "0");
-////            addButton(buttonPanel, "+");
-////            addButton(buttonPanel, "-");
-////            addButton(buttonPanel, "*");
-////            addButton(buttonPanel, "=");
-////
-//        contentPane.add(buttonPanel, BorderLayout.CENTER);
-//
-//        status = new JLabel(calc.getAuthor());
-//        contentPane.add(status, BorderLayout.SOUTH);
-
         frame.pack();
     }
 
     public void actionPerformed(ActionEvent event) {
-
+        String command = event.getActionCommand();
+        if(command.equals("Push to Set A")){
+            String text = input.getText();
+            calcSet.addToSetA(text);
+            input.setText(""); // clear input text field to enter a new element
+            setA.setText(calcSet.getStringSetA());
+        } else if(command.equals("Push to Set B")){
+            String text = input.getText();
+            calcSet.addToSetB(text);
+            input.setText("");
+            setB.setText(calcSet.getStringSetB());
+        } else if(command.equals("Union")){
+            calcSet.union();
+            result.setText(calcSet.getStringResult()); // put result of operation to result text field (display)
+        } else if(command.equals("Intersection")){
+            calcSet.intersection();
+            result.setText(calcSet.getStringResult()); // put result of operation to result text field (display)
+        } else if(command.equals("Subtraction")){
+            calcSet.subtraction();
+            result.setText(calcSet.getStringResult()); // put result of operation to result text field (display)
+        } else if(command.equals("Clear")){
+            calcSet.clear();
+            input.setText("");
+            setA.setText("");
+            setB.setText("");
+            result.setText("");
+        }
+//        result.setText(calcSet.getStringResult());
     }
 
 }

@@ -11,47 +11,56 @@ public class CalcEngineSet extends CalcEngine {
 		super();
 	}
 
-	private Set<String> parseStringToSet(String input) {
-		return null;
-	}
-
-	public void setSet(String input, SetName setName) throws IllegalArgumentException {
-	}
-
-	public int sizeOfSet(SetName setName) {
-		return 0;
-	}
-
 	public void clear() {
-
+		if (setA != null && setB != null && setResult != null) {
+			setA.clear();
+			setB.clear();
+			setResult.clear();
+		}
 	}
 
-	public Set<String> union() {
+	public void union() {
 		Set<String> union = new HashSet<String>();
 		union.addAll(setA);
 		union.addAll(setB);
-		return union;
+		setResult = union;
 	}
 
-	public Set<String> intersection() {
+	public void intersection() {
 		Set<String> intersection = new HashSet<String>();
 		intersection.addAll(setA);
-		intersection.retainAll(setB);
-		return intersection;
+		intersection.retainAll(setB); // remove all elements that are not in set B
+		setResult = intersection;
 	}
 
-	public Set<String> subtraction() {
-		Set<String>	subtraction = new HashSet<String>();
+	public void subtraction() {
+		Set<String> subtraction = new HashSet<String>();
 		subtraction.addAll(setA);
 		subtraction.removeAll(setB);
-		return subtraction;
+		setResult = subtraction;
 	}
 
 	public Set<String> power() {
 		return null;
 	}
 
-	enum SetName {
-		SET_A,SET_B,SET_RESULT;
+	public void addToSetA(String element) {
+		setA.add(element);
+	}
+
+	public void addToSetB(String element) {
+		setB.add(element);
+	}
+
+	public String getStringSetA() {
+		return setA.toString();
+	}
+
+	public String getStringSetB() {
+		return setB.toString();
+	}
+
+	public String getStringResult() {
+		return setResult.toString();
 	}
 }
